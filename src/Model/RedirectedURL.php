@@ -55,15 +55,15 @@ class RedirectedURL extends DataObject implements PermissionProvider
         'LinkToAsset' => File::class,
     ];
 
-    // private static $indexes = [
-    //     'From' => [
-    //         'type' => 'unique',
-    //         'columns' => [
-    //             'FromBase',
-    //             'FromQuerystring',
-    //         ],
-    //     ],
-    // ];
+    private static $indexes = [
+        'From' => [
+            'type' => 'index',
+            'columns' => [
+                'FromBase',
+                'FromQuerystring',
+            ],
+        ],
+    ];
 
     private static array $summary_fields = [
         'FromBase' => 'From URL base',

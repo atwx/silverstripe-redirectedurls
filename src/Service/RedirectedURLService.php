@@ -101,8 +101,12 @@ class RedirectedURLService implements RedirectedURLInterface
 
     public function getResponse(RedirectedURL $redirect): HTTPResponse
     {
+        $url = Director::absoluteURL($redirect->Link() ?? '');
+
+        $this->invokeWithExtensions('updateRedirectURL', $url, $redirect);
+
         $response = HTTPResponse::create()
-            ->redirect(Director::absoluteURL($redirect->Link() ?? ''), StatusCode::getRedirectCode($redirect));
+            ->redirect($url, StatusCode::getRedirectCode($redirect));
 
         return $response;
     }

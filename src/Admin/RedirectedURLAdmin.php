@@ -3,8 +3,8 @@
 namespace SilverStripe\RedirectedURLs\Admin;
 
 use SilverStripe\Admin\ModelAdmin;
-use SilverStripe\Dev\CsvBulkLoader;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\RedirectedURLs\Dev\SkippingCsvBulkLoader;
 use SilverStripe\RedirectedURLs\Model\RedirectedURL;
 use SilverStripe\Security\Permission;
 
@@ -34,7 +34,7 @@ class RedirectedURLAdmin extends ModelAdmin
      */
     public function getModelImporters(): array
     {
-        $importer = CsvBulkLoader::create(RedirectedURL::class);
+        $importer = SkippingCsvBulkLoader::create(RedirectedURL::class);
         $importer->duplicateChecks = [
             'FromBase' => ['callback' => 'findByFrom'],
         ];
